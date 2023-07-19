@@ -1,0 +1,22 @@
+model User {
+  id        String   @id @default(uuid())
+  githubId  Int      @unique
+  name      String
+  login     String
+  avatarUrl String
+  
+  memories  Memory[]
+}
+
+
+model Memory {
+  id        String   @id @default(uuid())
+  userId    String
+  
+  coverUrl  String
+  content   String
+  isPublic  Boolean  @default(false)
+  createdAr DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
